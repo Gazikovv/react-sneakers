@@ -1,4 +1,4 @@
-function Overlay(){
+function Drawer(){
     return(
         <div style={{display: 'none'}} className="overlay">
         <div className="drawer d-flex flex-column">
@@ -44,4 +44,4 @@ function Overlay(){
     );
 }
 
-export default Overlay;
+export default Drawer;
