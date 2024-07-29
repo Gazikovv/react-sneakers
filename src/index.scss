@@ -57,6 +57,15 @@ header{
   border-radius: 10px;
   padding: 0 15px;
   color: #C4C4C4;
+  position: relative;
+
+  .clear{
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    right: 15px;
+    top: 13px;
+  }
 
   input{
     border: none;
@@ -71,7 +80,7 @@ header{
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
+  height: 1180px;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
@@ -80,12 +89,13 @@ header{
   position: absolute;
   max-width: 420px;
   width: 100%;
-  height: 100%;
-  right: 0;
+  height: 777px;
+  top: 15px;
+  right: 15px;
   background: #FFFFFF;
   box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
   padding: 30px;
-
+  border-radius: 10px;
   .cart-items{
     overflow: auto;
     margin-bottom: 40px;
@@ -161,14 +171,45 @@ header{
     font-weight: 400;
   }
 
-  .remove-btn{
-    opacity: 0.5;
-    cursor: pointer;
-    transition: opacity .2s ease-in-out;
+}
 
-    &:hover{
-      opacity: 1;
-    }
+.remove-btn{
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity .2s ease-in-out;
+
+  &:hover{
+    opacity: 1;
   }
 }
 
+.sneakers-cards{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 40px;
+}
+
+.cartEmpty{
+  text-align: center;
+
+  p{
+    width: 280px;
+    line-height: 24px;
+  }
+
+  .green-btn{
+    position: relative;
+
+    &:hover{
+      img{
+        transform: translateX(-5px);
+      }
+    }
+    img{
+      position: relative;
+      top: 1px;
+      right: 30px;
+      transition: transform .2s ease-in-out;
+    }
+  }
+}
