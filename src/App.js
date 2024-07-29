@@ -1,5 +1,5 @@
 import React from 'react'
-import Axios from 'axios';
+import axios from 'axios';
 import Card from './components/Card'
 import Header from './components/Header'
 import Drawer from './components/Drawer'
@@ -11,28 +11,47 @@ function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
 
 React.useEffect(() =>{
-    Axios.get('https://66a3c01b44aa63704582609e.mockapi.io/sneakers').then(res =>{
+    axios.get('https://66a3c01b44aa63704582609e.mockapi.io/sneakers').then(res =>{
       setItems(res.data)
     });
-    Axios.get('https://66a3c01b44aa63704582609e.mockapi.io/cart').then(res =>{
+    axios.get('https://66a3c01b44aa63704582609e.mockapi.io/cart').then(res =>{
       setCartItems(res.data)
     });
 }, []);
 
 const onAddToCart = (obj) =>{
-  Axios.post('https://66a3c01b44aa63704582609e.mockapi.io/cart', obj);
+  axios.post('https://66a3c01b44aa63704582609e.mockapi.io/cart', obj);
   setCartItems((prev) => [...prev, obj])
 }
+// const onRemoveItem = (id) =>{
+//   Axios.delete(`https://66a3c01b44aa63704582609e.mockapi.io/cart/${id}`);
+//   setCartItems((prev) => prev.filter((item) => item.id !== id))
+// }
 
-const onRemoveItem = (id) =>{
-  Axios.delete(`https://66a3c01b44aa63704582609e.mockapi.io/cart/${id}`);
-  setCartItems((prev) => prev.filter((item) => item.id !== id))
-}
 
+const [loading, setLoading] = React.useState(false);
+
+
+const onRemoveItem = async (event, id) => {
+   event.preventDefault();
+   event.stopPropagation();
+
+   if (loading) return;
+
+   setLoading(true);
+   try {
+     await axios.delete(`https://66a3c01b44aa63704582609e.mockapi.io/cart/${id}`);
+     setCartItems(prev => prev.filter(item => item.id !== id));
+   } catch (error) {
+     console.error("Ошибка при удалении из корзины:", error);
+   } finally {
+     setLoading(false);
+   }
+ };
+console.log(cartItems)
 const onChangeSearchInput = (event) =>{
   setSearchValue(event.target.value)
 }
-
   return (
     <div className="wrapper clear">
         {cartOpened && <Drawer items={cartItems} onClose={() => setCartOpened(!cartOpened)} onRemove={onRemoveItem} />}
@@ -59,6 +78,7 @@ const onChangeSearchInput = (event) =>{
             .map((item, index) =>(
             <Card 
               key={index}
+              id={item.id}
               title= {item.title} 
               price= {item.price} 
               imageUrl={item.imageUrl} 
