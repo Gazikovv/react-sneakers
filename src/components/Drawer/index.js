@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios';
 
 import Info from '../Info';
-import AppContext from '../../context';
 import { useCart } from '../../hooks/useCart';
 
 import styles from './Drawer.module.scss'
@@ -41,7 +40,7 @@ function Drawer({onClose, onRemove, items = [], opened}){
         <div className={styles.drawer}>
           <div className="d-flex justify-between mb-30">
             <h2>Корзина</h2>
-            <img onClick={onClose} className="remove-btn" src="/img/btn-remove.svg" alt="btn"/>
+            <img onClick={onClose} className="remove-btn" src="img/btn-remove.svg" alt="btn"/>
           </div>
 
           {items.length > 0 ? (
@@ -54,7 +53,7 @@ function Drawer({onClose, onRemove, items = [], opened}){
                   <p className="mb-5">{obj.title}</p>
                   <b>{obj.price}</b>
                 </div>
-                <img onClick={(e) => onRemove(e, obj.id)} className="remove-btn" src="/img/btn-remove.svg" alt="remove"/>
+                <img onClick={(e) => onRemove(e, obj.id)} className="remove-btn" src="img/btn-remove.svg" alt="remove"/>
               </div>
             ))}
               </div>
@@ -73,7 +72,7 @@ function Drawer({onClose, onRemove, items = [], opened}){
             </ul>
             <button disabled={isLoading} onClick={onClickOrder} className="green-btn">
               Оформить заказ
-              <img src="/img/btn-right.svg" alt="right"/>
+              <img src="img/btn-right.svg" alt="right"/>
             </button>
               </div>
             </div>
@@ -81,7 +80,7 @@ function Drawer({onClose, onRemove, items = [], opened}){
             <Info 
               title={isOrderCompleted ? "Заказ оформлен!" : "Корзина пустая"} 
               description={isOrderCompleted ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке` : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."}
-              image={isOrderCompleted ? "/img/complete-order.svg" : "/img/empty-cart.svg"}></Info>
+              image={isOrderCompleted ? "img/complete-order.svg" : "img/empty-cart.svg"}></Info>
           )}
 
         </div>

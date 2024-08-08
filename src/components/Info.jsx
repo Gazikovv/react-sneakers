@@ -10,7 +10,7 @@ const Info = ({ title, image, description }) => {
         <h2 className="mt-20">{title}</h2>
         <p className="opacity-6 mb-40 mt-10">{description}</p>
             <button onClick={() => setCartOpened(false)} className="green-btn">
-                <img src="/img/arrow-left.png" alt="arrow"/>
+                <img src="img/arrow-left.png" alt="arrow"/>
                     Вернуться назад
             </button>
     </div>
